@@ -1,7 +1,6 @@
 package com.terraformersmc.traverse.client;
 
 import com.terraformersmc.terraform.boat.api.client.TerraformBoatClientHelper;
-import com.terraformersmc.terraform.sign.SpriteIdentifierRegistry;
 import com.terraformersmc.traverse.Traverse;
 import com.terraformersmc.traverse.block.TraverseBlocks;
 import net.minecraft.block.Block;
@@ -11,6 +10,7 @@ import net.minecraft.client.render.TexturedRenderLayers;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.util.Identifier;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -20,6 +20,7 @@ public class TraverseClient {
 
 	public TraverseClient(){
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::registerTextures);
 		registerEntityRenderers();
 	}
 
@@ -29,7 +30,6 @@ public class TraverseClient {
 
 	public void onInitializeClient() {
 		registerRenderLayers();
-		registerTextures();
 	}
 
 	private static void registerEntityRenderers() {
@@ -43,9 +43,11 @@ public class TraverseClient {
 		addArrayToLayer(cutout, TraverseBlocks.POTTED_RED_AUTUMNAL_SAPLING, TraverseBlocks.POTTED_BROWN_AUTUMNAL_SAPLING, TraverseBlocks.POTTED_ORANGE_AUTUMNAL_SAPLING, TraverseBlocks.POTTED_YELLOW_AUTUMNAL_SAPLING, TraverseBlocks.POTTED_FIR_SAPLING);
 	}
 
-	private static void registerTextures() {
-		Identifier texture = TraverseBlocks.FIR_SIGN.getTexture();
-		SpriteIdentifierRegistry.INSTANCE.addIdentifier(new SpriteIdentifier(TexturedRenderLayers.SIGNS_ATLAS_TEXTURE, texture));
+	private void registerTextures(TextureStitchEvent.Pre event) {
+		if (event.getAtlas().equals(TexturedRenderLayers.SIGNS_ATLAS_TEXTURE)){
+			TexturedRenderLayers.addWoodType(TraverseBlocks.FIR_SIGN_TYPE);
+			event.addSprite(new Identifier(Traverse.MOD_ID, "entity/sign/fir"));
+		}
 	}
 
 	public static void addArrayToLayer(RenderLayer layer, Block... blocks){

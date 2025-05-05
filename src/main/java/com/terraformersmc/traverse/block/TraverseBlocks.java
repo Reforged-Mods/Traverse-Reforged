@@ -15,6 +15,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.item.*;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.SignType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.BlockView;
@@ -53,9 +54,9 @@ public class TraverseBlocks {
 	public static final Block FIR_STAIRS = withItem("fir_stairs", new StairsBlock(FIR_PLANKS::getDefaultState, TerraformBlockSettings.copyOf(Blocks.OAK_STAIRS)), ItemGroup.BUILDING_BLOCKS);
 	public static final Block FIR_BUTTON = withItem("fir_button", new WoodenButtonBlock(TerraformBlockSettings.copyOf(Blocks.OAK_BUTTON)), ItemGroup.REDSTONE);
 	public static final Block FIR_DOOR = withItem("fir_door", new DoorBlock(TerraformBlockSettings.copyOf(Blocks.OAK_DOOR)), ItemGroup.REDSTONE);
-	private static final Identifier FIR_SIGN_TEXTURE = new Identifier(Traverse.MOD_ID, "entity/sign/fir");
-	public static final TerraformSignBlock FIR_SIGN = add("fir_sign", new TerraformSignBlock(FIR_SIGN_TEXTURE, TerraformBlockSettings.copyOf(Blocks.OAK_SIGN)));
-	public static final Block FIR_WALL_SIGN = add("fir_wall_sign", new TerraformWallSignBlock(FIR_SIGN_TEXTURE, TerraformBlockSettings.copyOf(Blocks.OAK_WALL_SIGN)));
+	public static final SignType FIR_SIGN_TYPE = SignType.register(SignType.create(Traverse.MOD_ID + ":fir"));
+	public static final SignBlock FIR_SIGN = add("fir_sign", new TerraformSignBlock(TerraformBlockSettings.copyOf(Blocks.OAK_SIGN), FIR_SIGN_TYPE));
+	public static final Block FIR_WALL_SIGN = add("fir_wall_sign", new TerraformWallSignBlock(TerraformBlockSettings.copyOf(Blocks.OAK_WALL_SIGN), FIR_SIGN_TYPE));
 	public static final Item FIR_SIGN_ITEM = TraverseItems.add("fir_sign", new SignItem(new Item.Settings().maxCount(16).group(ItemGroup.DECORATIONS), FIR_SIGN, FIR_WALL_SIGN));
 
 	public static final Block POTTED_RED_AUTUMNAL_SAPLING = add("potted_red_autumnal_sapling", new FlowerPotBlock(RED_AUTUMNAL_SAPLING, TerraformBlockSettings.copyOf(Blocks.POTTED_OAK_SAPLING)));
