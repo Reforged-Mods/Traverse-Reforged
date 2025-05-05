@@ -5,7 +5,7 @@ plugins {
 	id 'maven-publish'
 	id 'idea'
 	id 'eclipse'
-	id 'dev.architectury.loom' version '1.6-SNAPSHOT'
+	id 'dev.architectury.loom' version '1.9-SNAPSHOT'
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
