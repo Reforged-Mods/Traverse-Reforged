@@ -46,7 +46,7 @@ repositories {
 	maven {
 		url = 'https://maven.minecraftforge.net/'
 	}
-	maven {  url = "https://repo.repsy.io/mvn/trinsdar/reforged-mods/"}
+	maven {  url = "https://maven.blamejared.com/"}
 	maven { url 'https://jitpack.io' }
 }
 
@@ -57,11 +57,11 @@ dependencies {
 	forge "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
 	//includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-biome-remapper-api-v1:${project.terraform_biome_remapper_api_version}"
-	modImplementation include("io.github.reforgedmods.terraform-api:terraform-config-api-v1:${project.terraform_version}")
-	modImplementation include("io.github.reforgedmods.terraform-api:terraform-surfaces-api-v1:${project.terraform_version}")
-	modImplementation include("io.github.reforgedmods.terraform-api:terraform-tree-api-v1:${project.terraform_version}")
-	modImplementation include("io.github.reforgedmods.terraform-api:terraform-wood-api-v1:${project.terraform_version}")
-	modImplementation include("io.github.reforgedmods.terraform-api:terraform-utils-v1:${project.terraform_version}")
+	modImplementation include("dev.trinsdar:terraform-config-api-v1:${project.terraform_version}")
+	modImplementation include("dev.trinsdar:terraform-surfaces-api-v1:${project.terraform_version}")
+	modImplementation include("dev.trinsdar:terraform-tree-api-v1:${project.terraform_version}")
+	modImplementation include("dev.trinsdar:terraform-wood-api-v1:${project.terraform_version}")
+	modImplementation include("dev.trinsdar:terraform-utils-v1:${project.terraform_version}")
 
 	modImplementation "com.github.glitchfiend:TerraBlender-forge:${terrablender_version}"
 }
