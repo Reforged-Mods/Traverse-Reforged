@@ -44,9 +44,9 @@ public class TraverseClient {
 	}
 
 	private void registerTextures(TextureStitchEvent.Pre event) {
-		if (event.getAtlas().equals(TexturedRenderLayers.SIGNS_ATLAS_TEXTURE)){
+		if (event.getAtlas().getId().equals(TexturedRenderLayers.SIGNS_ATLAS_TEXTURE)){
 			TexturedRenderLayers.addWoodType(TraverseBlocks.FIR_SIGN_TYPE);
-			event.addSprite(new Identifier(Traverse.MOD_ID, "entity/sign/fir"));
+			event.addSprite(new Identifier(Traverse.MOD_ID, "entity/signs/fir"));
 		}
 	}
 
