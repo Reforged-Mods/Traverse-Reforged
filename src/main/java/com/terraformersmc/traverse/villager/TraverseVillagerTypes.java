@@ -3,7 +3,7 @@ package com.terraformersmc.traverse.villager;
 import com.terraformersmc.terraform.utils.mixin.VillagerTypeAccessor;
 import com.terraformersmc.traverse.Traverse;
 import com.terraformersmc.traverse.biome.TraverseBiomes;
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.village.VillagerType;
 import net.minecraft.world.biome.Biome;
 

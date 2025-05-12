@@ -13,6 +13,7 @@ import com.terraformersmc.traverse.item.TraverseItems;
 import net.minecraft.block.*;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.*;
+import net.minecraft.item.FireworkRocketItem.Type;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.SignType;
@@ -54,7 +55,7 @@ public class TraverseBlocks {
 	public static final Block FIR_STAIRS = withItem("fir_stairs", new StairsBlock(FIR_PLANKS::getDefaultState, TerraformBlockSettings.copyOf(Blocks.OAK_STAIRS)), ItemGroup.BUILDING_BLOCKS);
 	public static final Block FIR_BUTTON = withItem("fir_button", new WoodenButtonBlock(TerraformBlockSettings.copyOf(Blocks.OAK_BUTTON)), ItemGroup.REDSTONE);
 	public static final Block FIR_DOOR = withItem("fir_door", new DoorBlock(TerraformBlockSettings.copyOf(Blocks.OAK_DOOR)), ItemGroup.REDSTONE);
-	public static final SignType FIR_SIGN_TYPE = SignType.register(SignType.create(Traverse.MOD_ID + ":fir"));
+	public static final WoodType FIR_SIGN_TYPE = WoodType.register(new WoodType(Traverse.MOD_ID + ":fir"));
 	public static final SignBlock FIR_SIGN = add("fir_sign", new TerraformSignBlock(TerraformBlockSettings.copyOf(Blocks.OAK_SIGN), FIR_SIGN_TYPE));
 	public static final Block FIR_WALL_SIGN = add("fir_wall_sign", new TerraformWallSignBlock(TerraformBlockSettings.copyOf(Blocks.OAK_WALL_SIGN), FIR_SIGN_TYPE));
 	public static final Item FIR_SIGN_ITEM = TraverseItems.add("fir_sign", new SignItem(new Item.Settings().maxCount(16).group(ItemGroup.DECORATIONS), FIR_SIGN, FIR_WALL_SIGN));

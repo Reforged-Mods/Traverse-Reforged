@@ -20,7 +20,6 @@ public class TraverseClient {
 
 	public TraverseClient(){
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::registerTextures);
 		registerEntityRenderers();
 	}
 
@@ -30,10 +29,11 @@ public class TraverseClient {
 
 	public void onInitializeClient() {
 		registerRenderLayers();
+		registerTextures();
 	}
 
 	private static void registerEntityRenderers() {
-		TerraformBoatClientHelper.registerModelLayers(new Identifier(Traverse.MOD_ID, "fir"));
+		TerraformBoatClientHelper.registerModelLayers(new Identifier(Traverse.MOD_ID, "fir"), false);
 	}
 
 	private static void registerRenderLayers() {
@@ -43,11 +43,8 @@ public class TraverseClient {
 		addArrayToLayer(cutout, TraverseBlocks.POTTED_RED_AUTUMNAL_SAPLING, TraverseBlocks.POTTED_BROWN_AUTUMNAL_SAPLING, TraverseBlocks.POTTED_ORANGE_AUTUMNAL_SAPLING, TraverseBlocks.POTTED_YELLOW_AUTUMNAL_SAPLING, TraverseBlocks.POTTED_FIR_SAPLING);
 	}
 
-	private void registerTextures(TextureStitchEvent.Pre event) {
-		if (event.getAtlas().getId().equals(TexturedRenderLayers.SIGNS_ATLAS_TEXTURE)){
-			TexturedRenderLayers.addWoodType(TraverseBlocks.FIR_SIGN_TYPE);
-			event.addSprite(new Identifier(Traverse.MOD_ID, "entity/signs/fir"));
-		}
+	private void registerTextures() {
+		TexturedRenderLayers.addWoodType(TraverseBlocks.FIR_SIGN_TYPE);
 	}
 
 	public static void addArrayToLayer(RenderLayer layer, Block... blocks){
