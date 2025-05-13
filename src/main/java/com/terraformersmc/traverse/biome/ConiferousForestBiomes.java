@@ -3,6 +3,8 @@ package com.terraformersmc.traverse.biome;
 import com.terraformersmc.traverse.feature.TraversePlacedFeatures;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.registry.Registerable;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
@@ -12,32 +14,24 @@ import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import static com.terraformersmc.traverse.biome.TraverseBiomes.addBasicFeatures;
 
 public class ConiferousForestBiomes {
-	static final Biome CONIFEROUS_FOREST = new Biome.Builder()
-			.generationSettings(generationSettings(false))
-			.spawnSettings(spawnSettings())
-			.precipitation(Biome.Precipitation.RAIN)
-			.temperature(0.6F)
+
+	public static Biome create(Registerable<Biome> entries, boolean snowy) {
+		return new Biome.Builder()
+			.generationSettings(createGenerationSettings(entries, snowy))
+			.spawnSettings(createSpawnSettings())
+			.precipitation(true)
+			.temperature(snowy ? -0.5F : 0.6F)
 			.downfall(0.9F)
 			.effects(TraverseBiomes.createDefaultBiomeEffects()
-					.grassColor(0x338235)
-					.foliageColor(0x338235).build()
+				.grassColor(snowy ? 0x338251 : 0x338235)
+				.foliageColor(snowy ? 0x338251 : 0x338235)
+				.build()
 			)
 			.build();
+	}
 
-	static final Biome SNOWY_CONIFEROUS_FOREST = new Biome.Builder()
-			.generationSettings(generationSettings(true))
-			.spawnSettings(spawnSettings())
-			.precipitation(Biome.Precipitation.SNOW)
-			.temperature(-0.5F)
-			.downfall(0.9F)
-			.effects(TraverseBiomes.createDefaultBiomeEffects()
-					.grassColor(0x338251)
-					.foliageColor(0x338251).build()
-			)
-			.build();
-
-	private static GenerationSettings generationSettings(boolean snowy){
-		GenerationSettings.Builder builder = new GenerationSettings.Builder();
+	private static GenerationSettings createGenerationSettings(Registerable<Biome> context, boolean snowy) {
+		GenerationSettings.LookupBackedBuilder builder = new GenerationSettings.LookupBackedBuilder(context.getRegistryLookup(RegistryKeys.PLACED_FEATURE), context.getRegistryLookup(RegistryKeys.CONFIGURED_CARVER));
 		addBasicFeatures(builder);
 		DefaultBiomeFeatures.addLargeFerns(builder);
 		DefaultBiomeFeatures.addDefaultOres(builder);
@@ -54,7 +48,7 @@ public class ConiferousForestBiomes {
 		return builder.build();
 	}
 
-	private static SpawnSettings spawnSettings(){
+	private static SpawnSettings createSpawnSettings(){
 		SpawnSettings.Builder builder = TraverseBiomes.createDefaultSpawnSettings();
 		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.WOLF, 5, 4, 4));
 		return builder.build();

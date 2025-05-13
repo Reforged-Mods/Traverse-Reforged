@@ -3,6 +3,8 @@ package com.terraformersmc.traverse.biome;
 import com.terraformersmc.traverse.feature.TraversePlacedFeatures;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.registry.Registerable;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
@@ -13,22 +15,24 @@ import net.minecraft.world.gen.feature.OceanPlacedFeatures;
 import static com.terraformersmc.traverse.biome.TraverseBiomes.addBasicFeatures;
 
 public class LushSwampBiomes {
-	static final Biome LUSH_SWAMP = new Biome.Builder()
-			.precipitation(Biome.Precipitation.RAIN)
-			.generationSettings(generationSettings())
-			.spawnSettings(spawnSettings())
-			.precipitation(Biome.Precipitation.RAIN)
+	public static Biome create(Registerable<Biome> entries) {
+		return new Biome.Builder()
+			.generationSettings(createGenerationSettings(entries))
+			.spawnSettings(createSpawnSettings())
+			.precipitation(true)
 			.temperature(0.8F)
 			.downfall(0.9F)
 			.effects(TraverseBiomes.createDefaultBiomeEffects()
-					.grassColor(0x7FE03E)
-					.foliageColor(0x58EA33)
-					.waterColor(0x617B64)
-					.waterFogColor(0x232317).build())
+				.grassColor(0x7FE03E)
+				.foliageColor(0x58EA33)
+				.waterColor(0x617B64)
+				.waterFogColor(0x232317)
+				.build())
 			.build();
+	}
 
-	public static GenerationSettings generationSettings(){
-		GenerationSettings.Builder builder = new GenerationSettings.Builder();
+	private static GenerationSettings createGenerationSettings(Registerable<Biome> context) {
+		GenerationSettings.LookupBackedBuilder builder = new GenerationSettings.LookupBackedBuilder(context.getRegistryLookup(RegistryKeys.PLACED_FEATURE), context.getRegistryLookup(RegistryKeys.CONFIGURED_CARVER));
 		DefaultBiomeFeatures.addFossils(builder);
 		addBasicFeatures(builder);
 		DefaultBiomeFeatures.addDefaultOres(builder);
@@ -42,7 +46,7 @@ public class LushSwampBiomes {
 		return builder.build();
 	}
 
-	private static SpawnSettings spawnSettings() {
+	private static SpawnSettings createSpawnSettings() {
 		SpawnSettings.Builder builder = TraverseBiomes.createDefaultSpawnSettings();
 		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.SLIME, 1, 1, 1));
 		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.FROG, 10, 2, 5));

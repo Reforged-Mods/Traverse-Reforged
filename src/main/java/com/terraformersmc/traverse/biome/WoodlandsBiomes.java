@@ -3,6 +3,8 @@ package com.terraformersmc.traverse.biome;
 import com.terraformersmc.traverse.feature.TraversePlacedFeatures;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.registry.Registerable;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
@@ -12,20 +14,23 @@ import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import static com.terraformersmc.traverse.biome.TraverseBiomes.addBasicFeatures;
 
 public class WoodlandsBiomes {
-	static final Biome WOODLANDS = new Biome.Builder()
-			.generationSettings(generationSettings())
-			.spawnSettings(spawnSettings())
-			.precipitation(Biome.Precipitation.RAIN)
+	public static Biome create(Registerable<Biome> context) {
+		return new Biome.Builder()
+			.generationSettings(createGenerationSettings(context))
+			.spawnSettings(createSpawnSettings())
+			.precipitation(true)
 			.temperature(0.8F)
 			.downfall(0.4F)
 			.effects(TraverseBiomes.createDefaultBiomeEffects()
-					.grassColor(0x99A955)
-					.foliageColor(0x849E4A).build()
+				.grassColor(0x99A955)
+				.foliageColor(0x849E4A)
+				.build()
 			)
 			.build();
+	}
 
-	private static GenerationSettings generationSettings(){
-		GenerationSettings.Builder builder = new GenerationSettings.Builder();
+	private static GenerationSettings createGenerationSettings(Registerable<Biome> context) {
+		GenerationSettings.LookupBackedBuilder builder = new GenerationSettings.LookupBackedBuilder(context.getRegistryLookup(RegistryKeys.PLACED_FEATURE), context.getRegistryLookup(RegistryKeys.CONFIGURED_CARVER));
 		addBasicFeatures(builder);
 		DefaultBiomeFeatures.addDefaultOres(builder);
 		DefaultBiomeFeatures.addDefaultDisks(builder);
@@ -38,7 +43,7 @@ public class WoodlandsBiomes {
 		return builder.build();
 	}
 
-	private static SpawnSettings spawnSettings(){
+	private static SpawnSettings createSpawnSettings(){
 		SpawnSettings.Builder builder = TraverseBiomes.createDefaultSpawnSettings();
 		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.WOLF, 5, 4, 4));
 		return builder.build();

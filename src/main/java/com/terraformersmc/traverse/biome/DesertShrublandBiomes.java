@@ -3,6 +3,8 @@ package com.terraformersmc.traverse.biome;
 import com.terraformersmc.traverse.feature.TraversePlacedFeatures;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.registry.Registerable;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
@@ -12,20 +14,23 @@ import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import static com.terraformersmc.traverse.biome.TraverseBiomes.addBasicFeatures;
 
 public class DesertShrublandBiomes {
-	static final Biome DESERT_SHRUBLAND = new Biome.Builder()
-			.generationSettings(generationSettings())
-			.spawnSettings(spawnSettings())
-			.precipitation(Biome.Precipitation.NONE)
+	public static Biome create(Registerable<Biome> entries) {
+		return new Biome.Builder()
+			.generationSettings(createGenerationSettings(entries))
+			.spawnSettings(createSpawnSettings())
+			.precipitation(false)
 			.temperature(2.0F)
 			.downfall(0.0F)
 			.effects(TraverseBiomes.createDefaultBiomeEffects()
-					.grassColor(0xBFB755)
-					.foliageColor(0xAEA42A).build()
+				.grassColor(0xBFB755)
+				.foliageColor(0xAEA42A)
+				.build()
 			)
 			.build();
+	}
 
-	private static GenerationSettings generationSettings(){
-		GenerationSettings.Builder builder = new GenerationSettings.Builder();
+	private static GenerationSettings createGenerationSettings(Registerable<Biome> context) {
+		GenerationSettings.LookupBackedBuilder builder = new GenerationSettings.LookupBackedBuilder(context.getRegistryLookup(RegistryKeys.PLACED_FEATURE), context.getRegistryLookup(RegistryKeys.CONFIGURED_CARVER));
 		DefaultBiomeFeatures.addFossils(builder);
 		addBasicFeatures(builder);
 		DefaultBiomeFeatures.addDefaultOres(builder);
@@ -41,7 +46,7 @@ public class DesertShrublandBiomes {
 		return builder.build();
 	}
 
-	private static SpawnSettings spawnSettings(){
+	private static SpawnSettings createSpawnSettings(){
 		SpawnSettings.Builder builder = new SpawnSettings.Builder();
 		TraverseBiomes.addDefaultAmbientSpawnEntries(builder);
 		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.SPIDER, 100, 4, 4));

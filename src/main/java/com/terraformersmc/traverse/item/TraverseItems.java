@@ -3,7 +3,6 @@ package com.terraformersmc.traverse.item;
 import com.terraformersmc.traverse.Traverse;
 import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class TraverseItems {

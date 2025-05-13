@@ -3,29 +3,54 @@ package com.terraformersmc.traverse.biome;
 import com.terraformersmc.traverse.Traverse;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.registry.Registerable;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.world.biome.*;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeEffects;
+import net.minecraft.world.biome.GenerationSettings;
+import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TraverseBiomes {
 
-	private static int getSkyColor(float temperature) {
-		float f = temperature / 3.0F;
-		f = MathHelper.clamp(f, -1.0F, 1.0F);
-		return MathHelper.hsvToRgb(0.62222224F - f * 0.05F, 0.5F + f * 0.1F, 1.0F);
+	public static final RegistryKey<Biome> AUTUMNAL_WOODS = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Traverse.MOD_ID, "autumnal_woods"));
+	public static final RegistryKey<Biome> CONIFEROUS_FOREST = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Traverse.MOD_ID, "coniferous_forest"));
+	public static final RegistryKey<Biome> DESERT_SHRUBLAND = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Traverse.MOD_ID, "desert_shrubland"));
+	public static final RegistryKey<Biome> FLATLANDS = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Traverse.MOD_ID, "flatlands"));
+	public static final RegistryKey<Biome> LUSH_SWAMP = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Traverse.MOD_ID, "lush_swamp"));
+	public static final RegistryKey<Biome> SNOWY_CONIFEROUS_FOREST = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Traverse.MOD_ID, "snowy_coniferous_forest"));
+	public static final RegistryKey<Biome> WOODLANDS = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Traverse.MOD_ID, "woodlands"));
+
+	public static final List<RegistryKey<Biome>> BIOMES = List.of(
+		AUTUMNAL_WOODS,
+		CONIFEROUS_FOREST,
+		DESERT_SHRUBLAND,
+		FLATLANDS,
+		LUSH_SWAMP,
+		SNOWY_CONIFEROUS_FOREST,
+		WOODLANDS
+	);
+
+	public static void populate(Registerable<Biome> context) {
+		context.register(AUTUMNAL_WOODS, AutumnalWoodsBiomes.create(context));
+		context.register(CONIFEROUS_FOREST, ConiferousForestBiomes.create(context, false));
+		context.register(DESERT_SHRUBLAND, DesertShrublandBiomes.create(context));
+		context.register(FLATLANDS, FlatlandsBiomes.create(context));
+		context.register(LUSH_SWAMP, LushSwampBiomes.create(context));
+		context.register(SNOWY_CONIFEROUS_FOREST, ConiferousForestBiomes.create(context, true));
+		context.register(WOODLANDS, WoodlandsBiomes.create(context));
 	}
 
-	public static final Map<RegistryKey<Biome>, Biome> BIOMES = new HashMap<>();
-
-	static void addBasicFeatures(GenerationSettings.Builder generationSettings) {
+	static void addBasicFeatures(GenerationSettings.LookupBackedBuilder generationSettings) {
 		DefaultBiomeFeatures.addLandCarvers(generationSettings);
 		DefaultBiomeFeatures.addAmethystGeodes(generationSettings);
 		DefaultBiomeFeatures.addDungeons(generationSettings);
@@ -72,31 +97,13 @@ public class TraverseBiomes {
 				.fogColor(0xC0D8FF);
 	}
 
-	public static final RegistryKey<Biome> AUTUMNAL_WOODS = add("autumnal_woods", AutumnalWoodsBiomes.AUTUMNAL_WOODS);
-	public static final RegistryKey<Biome> CONIFEROUS_FOREST = add("coniferous_forest", ConiferousForestBiomes.CONIFEROUS_FOREST);
-	public static final RegistryKey<Biome> DESERT_SHRUBLAND = add("desert_shrubland", DesertShrublandBiomes.DESERT_SHRUBLAND);
-	public static final RegistryKey<Biome> FLATLANDS = add("flatlands", FlatlandsBiomes.FLATLANDS);
-	public static final RegistryKey<Biome> LUSH_SWAMP = add("lush_swamp", LushSwampBiomes.LUSH_SWAMP);
-	public static final RegistryKey<Biome> SNOWY_CONIFEROUS_FOREST = add("snowy_coniferous_forest", ConiferousForestBiomes.SNOWY_CONIFEROUS_FOREST);
-	public static final RegistryKey<Biome> WOODLANDS = add("woodlands", WoodlandsBiomes.WOODLANDS);
-
-	static RegistryKey<Biome> add(String name) {
-		Identifier id = new Identifier(Traverse.MOD_ID, name);
-
-		return RegistryKey.of(Registry.BIOME_KEY, id);
-	}
-
-	static RegistryKey<Biome> add(String name, Biome biome) {
-		RegistryKey<Biome> key = RegistryKey.of(Registry.BIOME_KEY, new Identifier(Traverse.MOD_ID, name));
-		BIOMES.put(key, biome);
-		return key;
+	private static int getSkyColor(float temperature) {
+		float f = temperature / 3.0F;
+		f = MathHelper.clamp(f, -1.0F, 1.0F);
+		return MathHelper.hsvToRgb(0.62222224F - f * 0.05F, 0.5F + f * 0.1F, 1.0F);
 	}
 
 	public static void register() {
-		for (RegistryKey<Biome> key : BIOMES.keySet()) {
-			Biome biome = BIOMES.get(key);
-			ForgeRegistries.BIOMES.register(key.getValue(), biome);
-			Traverse.LOGGER.debug("TraverseBiomes.register: '" + key.getValue() + "' received ID: " + BuiltinRegistries.BIOME.getRawId(BIOMES.get(key)));
-		}
+		// This just creates the registry keys.  Biome objects are requested and consumed by datagen now.
 	}
 }
