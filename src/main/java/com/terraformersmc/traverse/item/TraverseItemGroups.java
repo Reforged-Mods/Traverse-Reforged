@@ -23,6 +23,8 @@ public class TraverseItemGroups {
 		.icon(() -> new ItemStack(TraverseBlocks.FIR_SAPLING))
 		.entries((displayContext, entries) -> {
 			entries.addAll(TraverseItems.ITEMS.stream().map(ItemStack::new).toList());
+			entries.add(TraverseBoatTypes.FIR_BOAT);
+			entries.add(TraverseBoatTypes.FIR_CHEST_BOAT);
 		}).build();
 
 	public static void register() {
