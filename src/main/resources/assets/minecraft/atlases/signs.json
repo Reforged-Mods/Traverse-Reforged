@@ -1,0 +1,12 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:single",
+      "resource": "traverse:entity/signs/fir"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "traverse:entity/signs/hanging/fir"
+    }
+  ]
+}
