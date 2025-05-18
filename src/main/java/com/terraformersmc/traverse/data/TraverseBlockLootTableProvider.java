@@ -2,12 +2,19 @@ package com.terraformersmc.traverse.data;
 
 import com.terraformersmc.traverse.block.TraverseBlocks;
 import net.minecraft.block.Block;
-import net.minecraft.data.server.BlockLootTableGenerator;
+import net.minecraft.data.server.loottable.BlockLootTableGenerator;
+import net.minecraft.resource.featuretoggle.FeatureFlags;
+
+import java.util.Set;
 
 public class TraverseBlockLootTableProvider extends BlockLootTableGenerator {
 
+	protected TraverseBlockLootTableProvider() {
+		super(Set.of(), FeatureFlags.FEATURE_MANAGER.getFeatureSet());
+	}
+
 	@Override
-	protected void addTables() {
+	protected void generate() {
 		// simple blocks
 		addDrop(TraverseBlocks.BROWN_AUTUMNAL_SAPLING);
 		addDrop(TraverseBlocks.FIR_BUTTON);
@@ -29,22 +36,22 @@ public class TraverseBlockLootTableProvider extends BlockLootTableGenerator {
 		addDrop(TraverseBlocks.YELLOW_AUTUMNAL_SAPLING);
 
 		// less simple blocks
-		addDrop(TraverseBlocks.FIR_DOOR, BlockLootTableGenerator::doorDrops);
-		addDrop(TraverseBlocks.FIR_SLAB, BlockLootTableGenerator::slabDrops);
+		addDrop(TraverseBlocks.FIR_DOOR, this::doorDrops);
+		addDrop(TraverseBlocks.FIR_SLAB, this::slabDrops);
 
 		// potted things
-		addPottedPlantDrop(TraverseBlocks.POTTED_BROWN_AUTUMNAL_SAPLING);
-		addPottedPlantDrop(TraverseBlocks.POTTED_FIR_SAPLING);
-		addPottedPlantDrop(TraverseBlocks.POTTED_ORANGE_AUTUMNAL_SAPLING);
-		addPottedPlantDrop(TraverseBlocks.POTTED_RED_AUTUMNAL_SAPLING);
-		addPottedPlantDrop(TraverseBlocks.POTTED_YELLOW_AUTUMNAL_SAPLING);
+		addPottedPlantDrops(TraverseBlocks.POTTED_BROWN_AUTUMNAL_SAPLING);
+		addPottedPlantDrops(TraverseBlocks.POTTED_FIR_SAPLING);
+		addPottedPlantDrops(TraverseBlocks.POTTED_ORANGE_AUTUMNAL_SAPLING);
+		addPottedPlantDrops(TraverseBlocks.POTTED_RED_AUTUMNAL_SAPLING);
+		addPottedPlantDrops(TraverseBlocks.POTTED_YELLOW_AUTUMNAL_SAPLING);
 
 		// tree leaves
-		addDrop(TraverseBlocks.BROWN_AUTUMNAL_LEAVES, leavesDrop(TraverseBlocks.BROWN_AUTUMNAL_LEAVES, TraverseBlocks.BROWN_AUTUMNAL_SAPLING, 0.05f, 0.0625f, 0.083333336f, 0.1f));
-		addDrop(TraverseBlocks.FIR_LEAVES, leavesDrop(TraverseBlocks.FIR_LEAVES, TraverseBlocks.FIR_SAPLING, 0.05f, 0.0625f, 0.083333336f, 0.1f));
-		addDrop(TraverseBlocks.ORANGE_AUTUMNAL_LEAVES, leavesDrop(TraverseBlocks.ORANGE_AUTUMNAL_LEAVES, TraverseBlocks.ORANGE_AUTUMNAL_SAPLING, 0.05f, 0.0625f, 0.083333336f, 0.1f));
-		addDrop(TraverseBlocks.RED_AUTUMNAL_LEAVES, leavesDrop(TraverseBlocks.RED_AUTUMNAL_LEAVES, TraverseBlocks.RED_AUTUMNAL_SAPLING, 0.05f, 0.0625f, 0.083333336f, 0.1f));
-		addDrop(TraverseBlocks.YELLOW_AUTUMNAL_LEAVES, leavesDrop(TraverseBlocks.YELLOW_AUTUMNAL_LEAVES, TraverseBlocks.YELLOW_AUTUMNAL_SAPLING, 0.05f, 0.0625f, 0.083333336f, 0.1f));
+		addDrop(TraverseBlocks.BROWN_AUTUMNAL_LEAVES, leavesDrops(TraverseBlocks.BROWN_AUTUMNAL_LEAVES, TraverseBlocks.BROWN_AUTUMNAL_SAPLING, 0.05f, 0.0625f, 0.083333336f, 0.1f));
+		addDrop(TraverseBlocks.FIR_LEAVES, leavesDrops(TraverseBlocks.FIR_LEAVES, TraverseBlocks.FIR_SAPLING, 0.05f, 0.0625f, 0.083333336f, 0.1f));
+		addDrop(TraverseBlocks.ORANGE_AUTUMNAL_LEAVES, leavesDrops(TraverseBlocks.ORANGE_AUTUMNAL_LEAVES, TraverseBlocks.ORANGE_AUTUMNAL_SAPLING, 0.05f, 0.0625f, 0.083333336f, 0.1f));
+		addDrop(TraverseBlocks.RED_AUTUMNAL_LEAVES, leavesDrops(TraverseBlocks.RED_AUTUMNAL_LEAVES, TraverseBlocks.RED_AUTUMNAL_SAPLING, 0.05f, 0.0625f, 0.083333336f, 0.1f));
+		addDrop(TraverseBlocks.YELLOW_AUTUMNAL_LEAVES, leavesDrops(TraverseBlocks.YELLOW_AUTUMNAL_LEAVES, TraverseBlocks.YELLOW_AUTUMNAL_SAPLING, 0.05f, 0.0625f, 0.083333336f, 0.1f));
 	}
 
 	@Override
