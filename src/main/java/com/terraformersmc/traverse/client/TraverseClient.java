@@ -3,6 +3,7 @@ package com.terraformersmc.traverse.client;
 import com.terraformersmc.terraform.boat.api.client.TerraformBoatClientHelper;
 import com.terraformersmc.traverse.Traverse;
 import com.terraformersmc.traverse.block.TraverseBlocks;
+import com.terraformersmc.traverse.item.TraverseItemGroups;
 import net.minecraft.block.Block;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.RenderLayers;
@@ -15,6 +16,7 @@ public class TraverseClient {
 
 	public TraverseClient(){
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(TraverseItemGroups::onCreativeTabPopulate);
 		registerEntityRenderers();
 	}
 

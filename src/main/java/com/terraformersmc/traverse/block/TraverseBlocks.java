@@ -59,7 +59,7 @@ public class TraverseBlocks {
 	public static final Block FIR_WALL_SIGN = add("fir_wall_sign", new TerraformWallSignBlock(TerraformBlockSettings.copyOf(Blocks.OAK_WALL_SIGN), FIR_WOOD_TYPE));
 	public static final Block FIR_HANGING_SIGN = add("fir_hanging_sign", new TerraformHangingSignBlock(TerraformBlockSettings.copyOf(Blocks.OAK_HANGING_SIGN), FIR_WOOD_TYPE));
 	public static final Block FIR_WALL_HANGING_SIGN = add("fir_wall_hanging_sign", new TerraformWallHangingSignBlock(TerraformBlockSettings.copyOf(Blocks.OAK_WALL_HANGING_SIGN).dropsLike(FIR_HANGING_SIGN), FIR_WOOD_TYPE));
-	public static final Item FIR_SIGN_ITEM = TraverseItems.add("fir_sign", new SignItem(new Item.Settings().maxCount(16), FIR_SIGN, FIR_WALL_SIGN));
+
 
 	public static final Block POTTED_RED_AUTUMNAL_SAPLING = add("potted_red_autumnal_sapling", new FlowerPotBlock(RED_AUTUMNAL_SAPLING, TerraformBlockSettings.copyOf(Blocks.POTTED_OAK_SAPLING)));
 	public static final Block POTTED_BROWN_AUTUMNAL_SAPLING = add("potted_brown_autumnal_sapling", new FlowerPotBlock(BROWN_AUTUMNAL_SAPLING, TerraformBlockSettings.copyOf(Blocks.POTTED_OAK_SAPLING)));

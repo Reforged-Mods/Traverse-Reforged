@@ -8,13 +8,10 @@ import com.terraformersmc.traverse.feature.TraverseConfiguredFeatures;
 import com.terraformersmc.traverse.feature.TraversePlacedFeatures;
 import com.terraformersmc.traverse.feature.placer.TraversePlacerTypes;
 import com.terraformersmc.traverse.item.TraverseBoatTypes;
+import com.terraformersmc.traverse.item.TraverseItemGroups;
 import com.terraformersmc.traverse.item.TraverseItems;
 import com.terraformersmc.traverse.villager.TraverseVillagerTypes;
 import com.terraformersmc.traverse.worldgen.TraverseWorldgen;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.util.registry.Registry;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -38,7 +35,6 @@ public class Traverse {
 	private static final TraverseConfigManager CONFIG_MANAGER = new TraverseConfigManager();
 
 	private static Boolean initialized = false;
-	public static ItemGroup itemGroup;
 	private static final ArrayList<Runnable> runnables = new ArrayList<>(1);
 
 	public Traverse(){
@@ -69,27 +65,11 @@ public class Traverse {
 		TraverseBiomes.register();
 		TraverseVillagerTypes.register();
 		TraversePlacerTypes.register();
+		TraverseItemGroups.register();
 
 		// This must be after TraverseBiomes.init()
 		CONFIG_MANAGER.getBiomeConfig();
 
-		itemGroup = new ItemGroup(MOD_ID + ".items") {
-
-			@Override
-			public void appendStacks(DefaultedList<ItemStack> stacks) {
-				super.appendStacks(stacks);
-				Registry.ITEM.forEach(item -> {
-					if (Registry.ITEM.getId(item).getNamespace().equals(MOD_ID)) {
-						item.appendStacks(item.getGroup(), stacks);
-					}
-				});
-			}
-
-			@Override
-			public ItemStack createIcon() {
-				return new ItemStack(TraverseBlocks.FIR_SAPLING.asItem());
-			}
-		};
 	}
 
 	public void onInitialize() {
