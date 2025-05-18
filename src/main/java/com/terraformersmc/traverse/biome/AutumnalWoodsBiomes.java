@@ -4,6 +4,7 @@ import com.terraformersmc.traverse.feature.TraversePlacedFeatures;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registerable;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
@@ -15,7 +16,7 @@ import static com.terraformersmc.traverse.biome.TraverseBiomes.addBasicFeatures;
 public class AutumnalWoodsBiomes {
 	public static Biome create(Registerable<Biome> registerable){
 		return new Biome.Builder()
-			.generationSettings(generationSettings())
+			.generationSettings(createGenerationSettings(registerable))
 			.spawnSettings(spawnSettings())
 			.precipitation(true)
 			.temperature(0.8F)
@@ -28,8 +29,8 @@ public class AutumnalWoodsBiomes {
 	}
 
 
-	private static GenerationSettings generationSettings(){
-		GenerationSettings.Builder builder = new GenerationSettings.Builder();
+	private static GenerationSettings createGenerationSettings(Registerable<Biome> context){
+		GenerationSettings.LookupBackedBuilder builder = new GenerationSettings.LookupBackedBuilder(context.getRegistryLookup(RegistryKeys.PLACED_FEATURE), context.getRegistryLookup(RegistryKeys.CONFIGURED_CARVER));
 		addBasicFeatures(builder);
 		DefaultBiomeFeatures.addDefaultOres(builder);
 		DefaultBiomeFeatures.addDefaultDisks(builder);
