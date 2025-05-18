@@ -5,6 +5,7 @@ import com.terraformersmc.traverse.block.TraverseBlocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
@@ -21,9 +22,7 @@ public class TraverseItemGroups {
 		.displayName(Text.translatable("itemGroup.traverse.items"))
 		.icon(() -> new ItemStack(TraverseBlocks.FIR_SAPLING))
 		.entries((displayContext, entries) -> {
-			entries.addAll(TraverseBlocks.BLOCKS.stream().map(ItemStack::new).toList());
-			entries.add(TraverseItems.FIR_HANGING_SIGN);
-			entries.add(TraverseItems.FIR_SIGN);
+			entries.addAll(TraverseItems.ITEMS.stream().map(ItemStack::new).toList());
 		}).build();
 
 	public static void register() {
