@@ -24,9 +24,11 @@ public class TraverseBlockLootTableProvider extends BlockLootTableGenerator {
 		addDrop(TraverseBlocks.FIR_PLANKS);
 		addDrop(TraverseBlocks.FIR_PRESSURE_PLATE);
 		addDrop(TraverseBlocks.FIR_SAPLING);
+		addDrop(TraverseBlocks.FIR_HANGING_SIGN);
 		addDrop(TraverseBlocks.FIR_SIGN);
 		addDrop(TraverseBlocks.FIR_STAIRS);
 		addDrop(TraverseBlocks.FIR_TRAPDOOR);
+		addDrop(TraverseBlocks.FIR_WALL_HANGING_SIGN);
 		addDrop(TraverseBlocks.FIR_WALL_SIGN);
 		addDrop(TraverseBlocks.FIR_WOOD);
 		addDrop(TraverseBlocks.ORANGE_AUTUMNAL_SAPLING);

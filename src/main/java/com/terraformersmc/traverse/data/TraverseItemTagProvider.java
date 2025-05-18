@@ -3,12 +3,14 @@ package com.terraformersmc.traverse.data;
 import com.terraformersmc.traverse.Traverse;
 import com.terraformersmc.traverse.block.TraverseBlocks;
 import com.terraformersmc.traverse.item.TraverseBoatTypes;
+import com.terraformersmc.traverse.tag.TraverseBlockTags;
 import com.terraformersmc.traverse.tag.TraverseItemTags;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataOutput;
 import net.minecraft.data.server.tag.ItemTagProvider;
 import net.minecraft.registry.RegistryWrapper.WrapperLookup;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -29,64 +31,38 @@ public class TraverseItemTagProvider extends ItemTagProvider {
 		this.getOrCreateTagBuilder(ItemTags.CHEST_BOATS)
 			.add(TraverseBoatTypes.fir.getChestItem());
 
-		this.getOrCreateTagBuilder(ItemTags.LEAVES)
-			.add(TraverseBlocks.BROWN_AUTUMNAL_LEAVES.asItem())
-			.add(TraverseBlocks.RED_AUTUMNAL_LEAVES.asItem())
-			.add(TraverseBlocks.YELLOW_AUTUMNAL_LEAVES.asItem())
-			.add(TraverseBlocks.ORANGE_AUTUMNAL_LEAVES.asItem())
-			.add(TraverseBlocks.FIR_LEAVES.asItem());
+		copy(BlockTags.LEAVES, ItemTags.LEAVES);
 
-		this.getOrCreateTagBuilder(ItemTags.LOGS_THAT_BURN)
-			.addTag(TraverseItemTags.FIR_LOGS);
+		copy(BlockTags.LOGS_THAT_BURN, ItemTags.LOGS_THAT_BURN);
 
-		this.getOrCreateTagBuilder(ItemTags.PLANKS)
-			.add(TraverseBlocks.FIR_PLANKS.asItem());
+		copy(BlockTags.PLANKS, ItemTags.PLANKS);
 
-		this.getOrCreateTagBuilder(ItemTags.SAPLINGS)
-			.add(TraverseBlocks.BROWN_AUTUMNAL_SAPLING.asItem())
-			.add(TraverseBlocks.RED_AUTUMNAL_SAPLING.asItem())
-			.add(TraverseBlocks.YELLOW_AUTUMNAL_SAPLING.asItem())
-			.add(TraverseBlocks.ORANGE_AUTUMNAL_SAPLING.asItem())
-			.add(TraverseBlocks.FIR_SAPLING.asItem());
+		copy(BlockTags.SAPLINGS, ItemTags.SAPLINGS);
 
-		this.getOrCreateTagBuilder(ItemTags.SIGNS)
-			.add(TraverseBlocks.FIR_SIGN.asItem());
+		copy(BlockTags.STANDING_SIGNS, ItemTags.SIGNS);
 
-		this.getOrCreateTagBuilder(ItemTags.WOODEN_BUTTONS)
-			.add(TraverseBlocks.FIR_BUTTON.asItem());
+		copy(BlockTags.CEILING_HANGING_SIGNS, ItemTags.HANGING_SIGNS);
 
-		this.getOrCreateTagBuilder(ItemTags.WOODEN_DOORS)
-			.add(TraverseBlocks.FIR_DOOR.asItem());
+		copy(BlockTags.WOODEN_BUTTONS, ItemTags.WOODEN_BUTTONS);
 
-		this.getOrCreateTagBuilder(ItemTags.WOODEN_FENCES)
-			.add(TraverseBlocks.FIR_FENCE.asItem());
+		copy(BlockTags.WOODEN_DOORS, ItemTags.WOODEN_DOORS);
 
-		this.getOrCreateTagBuilder(ItemTags.WOODEN_PRESSURE_PLATES)
-			.add(TraverseBlocks.FIR_PRESSURE_PLATE.asItem());
+		copy(BlockTags.WOODEN_FENCES, ItemTags.WOODEN_FENCES);
 
-		this.getOrCreateTagBuilder(ItemTags.WOODEN_SLABS)
-			.add(TraverseBlocks.FIR_SLAB.asItem());
+		copy(BlockTags.WOODEN_PRESSURE_PLATES, ItemTags.WOODEN_PRESSURE_PLATES);
 
-		this.getOrCreateTagBuilder(ItemTags.WOODEN_STAIRS)
-			.add(TraverseBlocks.FIR_STAIRS.asItem());
+		copy(BlockTags.WOODEN_SLABS, ItemTags.WOODEN_SLABS);
 
-		this.getOrCreateTagBuilder(ItemTags.WOODEN_TRAPDOORS)
-			.add(TraverseBlocks.FIR_TRAPDOOR.asItem());
+		copy(BlockTags.WOODEN_STAIRS, ItemTags.WOODEN_STAIRS);
 
+		copy(BlockTags.WOODEN_TRAPDOORS, ItemTags.WOODEN_TRAPDOORS);
 
-		this.getOrCreateTagBuilder(TraverseItemTags.FIR_LOGS)
-			.add(TraverseBlocks.FIR_LOG.asItem())
-			.add(TraverseBlocks.FIR_WOOD.asItem())
-			.add(TraverseBlocks.STRIPPED_FIR_LOG.asItem())
-			.add(TraverseBlocks.STRIPPED_FIR_WOOD.asItem());
+		copy(TraverseBlockTags.FIR_LOGS, TraverseItemTags.FIR_LOGS);
 
-		this.getOrCreateTagBuilder(TraverseItemTags.PLANKS_THAT_BURN)
-			.add(TraverseBlocks.FIR_PLANKS.asItem());
+		copy(TraverseBlockTags.PLANKS_THAT_BURN, TraverseItemTags.PLANKS_THAT_BURN);
 
-		this.getOrCreateTagBuilder(TraverseItemTags.STRIPPED_LOGS)
-			.add(TraverseBlocks.STRIPPED_FIR_LOG.asItem());
+		copy(TraverseBlockTags.STRIPPED_LOGS, TraverseItemTags.STRIPPED_LOGS);
 
-		this.getOrCreateTagBuilder(TraverseItemTags.STRIPPED_WOOD)
-			.add(TraverseBlocks.STRIPPED_FIR_WOOD.asItem());
+		copy(TraverseBlockTags.STRIPPED_WOOD, TraverseItemTags.STRIPPED_WOOD);
 	}
 }

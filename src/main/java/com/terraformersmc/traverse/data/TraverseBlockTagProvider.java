@@ -57,6 +57,12 @@ public class TraverseBlockTagProvider extends BlockTagsProvider {
 			.add(TraverseBlocks.ORANGE_AUTUMNAL_SAPLING)
 			.add(TraverseBlocks.FIR_SAPLING);
 
+		this.getOrCreateTagBuilder(BlockTags.CEILING_HANGING_SIGNS)
+			.add(TraverseBlocks.FIR_HANGING_SIGN);
+
+		this.getOrCreateTagBuilder(BlockTags.WALL_HANGING_SIGNS)
+			.add(TraverseBlocks.FIR_WALL_HANGING_SIGN);
+
 		this.getOrCreateTagBuilder(BlockTags.STANDING_SIGNS)
 			.add(TraverseBlocks.FIR_SIGN);
 

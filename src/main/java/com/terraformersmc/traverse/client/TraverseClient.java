@@ -7,12 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.TexturedRenderLayers;
-import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.util.Identifier;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
@@ -44,7 +39,7 @@ public class TraverseClient {
 	}
 
 	private void registerTextures() {
-		TexturedRenderLayers.addWoodType(TraverseBlocks.FIR_SIGN_TYPE);
+		TexturedRenderLayers.addWoodType(TraverseBlocks.FIR_WOOD_TYPE);
 	}
 
 	public static void addArrayToLayer(RenderLayer layer, Block... blocks){
