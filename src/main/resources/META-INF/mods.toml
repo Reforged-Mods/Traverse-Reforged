@@ -23,9 +23,4 @@ mandatory=true
 versionRange="[1.19.2,)"
 ordering="AFTER"
 side="BOTH"
-[[dependencies.traverse]]
-modId="terrablender"
-mandatory=true
-versionRange="[2.0.1.128,)"
-ordering="AFTER"
-side="BOTH"
+
