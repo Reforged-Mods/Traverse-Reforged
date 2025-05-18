@@ -8,24 +8,26 @@ import com.terraformersmc.traverse.tag.TraverseItemTags;
 import net.minecraft.advancement.criterion.InventoryChangedCriterion;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.DataOutput;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.tag.ItemTags;
+import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Identifier;
 
 import java.util.function.Consumer;
 
 public class TraverseRecipeProvider extends TerraformRecipeProvider {
-	public TraverseRecipeProvider(DataGenerator dataGenerator) {
-		super(dataGenerator);
+	public TraverseRecipeProvider(DataOutput dataOutput) {
+		super(dataOutput);
 	}
 
 	@Override
 	protected void generate(Consumer<RecipeJsonProvider> exporter) {
 		offerBoatRecipe(exporter, TraverseBoatTypes.fir.getItem(), TraverseBlocks.FIR_PLANKS);
-		ShapelessRecipeJsonBuilder.create(TraverseBoatTypes.fir.getChestItem()).input(Blocks.CHEST).input(TraverseBoatTypes.fir.getItem()).group("chest_boat").criterion("has_boat", conditionsFromTag(ItemTags.BOATS)).offerTo(exporter);
+		ShapelessRecipeJsonBuilder.create(RecipeCategory.TRANSPORTATION, TraverseBoatTypes.fir.getChestItem()).input(Blocks.CHEST).input(TraverseBoatTypes.fir.getItem()).group("chest_boat").criterion("has_boat", conditionsFromTag(ItemTags.BOATS)).offerTo(exporter);
 
 		offerSingleOutputShapelessRecipe(exporter, TraverseBlocks.FIR_BUTTON, TraverseBlocks.FIR_PLANKS, "wooden_button");
 
@@ -41,7 +43,7 @@ public class TraverseRecipeProvider extends TerraformRecipeProvider {
 			.criterion("has_planks", InventoryChangedCriterion.Conditions.items(TraverseBlocks.FIR_PLANKS))
 			.offerTo(exporter);
 
-		offerPlanksRecipe(exporter, TraverseBlocks.FIR_PLANKS, TraverseItemTags.FIR_LOGS);
+		offerPlanksRecipe(exporter, TraverseBlocks.FIR_PLANKS, TraverseItemTags.FIR_LOGS, 4);
 
 		offerPressurePlateRecipe(exporter, TraverseBlocks.FIR_PRESSURE_PLATE, TraverseBlocks.FIR_PLANKS);
 
@@ -49,7 +51,7 @@ public class TraverseRecipeProvider extends TerraformRecipeProvider {
 			.criterion("has_planks", InventoryChangedCriterion.Conditions.items(TraverseBlocks.FIR_PLANKS))
 			.offerTo(exporter);
 
-		offerSlabRecipe(exporter, TraverseBlocks.FIR_SLAB, TraverseBlocks.FIR_PLANKS);
+		offerSlabRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, TraverseBlocks.FIR_SLAB, TraverseBlocks.FIR_PLANKS);
 
 		createStairsRecipe(TraverseBlocks.FIR_STAIRS, Ingredient.ofItems(TraverseBlocks.FIR_PLANKS))
 			.criterion("has_planks", InventoryChangedCriterion.Conditions.items(TraverseBlocks.FIR_PLANKS))
@@ -59,7 +61,7 @@ public class TraverseRecipeProvider extends TerraformRecipeProvider {
 			.criterion("has_planks", InventoryChangedCriterion.Conditions.items(TraverseBlocks.FIR_PLANKS))
 			.offerTo(exporter);
 
-		new ShapedRecipeJsonBuilder(TraverseBlocks.FIR_WOOD, 3)
+		new ShapedRecipeJsonBuilder(RecipeCategory.BUILDING_BLOCKS, TraverseBlocks.FIR_WOOD, 3)
 			.group("bark")
 			.pattern("LL")
 			.pattern("LL")
@@ -67,7 +69,7 @@ public class TraverseRecipeProvider extends TerraformRecipeProvider {
 			.criterion("has_logs", InventoryChangedCriterion.Conditions.items(TraverseBlocks.FIR_LOG))
 			.offerTo(exporter, new Identifier(Traverse.MOD_ID, "fir_wood"));
 
-		new ShapedRecipeJsonBuilder(TraverseBlocks.STRIPPED_FIR_WOOD, 3)
+		new ShapedRecipeJsonBuilder(RecipeCategory.BUILDING_BLOCKS, TraverseBlocks.STRIPPED_FIR_WOOD, 3)
 			.group("bark")
 			.pattern("LL")
 			.pattern("LL")

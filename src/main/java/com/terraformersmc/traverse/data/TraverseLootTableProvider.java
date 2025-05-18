@@ -3,7 +3,8 @@ package com.terraformersmc.traverse.data;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.server.LootTableProvider;
+import net.minecraft.data.DataOutput;
+import net.minecraft.data.server.loottable.LootTableProvider;
 import net.minecraft.loot.LootManager;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.LootTableReporter;
@@ -18,7 +19,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class TraverseLootTableProvider extends LootTableProvider {
-    public TraverseLootTableProvider(DataGenerator root) {
+    public TraverseLootTableProvider(DataOutput root) {
         super(root);
     }
 

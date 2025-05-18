@@ -3,63 +3,66 @@ package com.terraformersmc.traverse.data;
 import com.terraformersmc.traverse.Traverse;
 import com.terraformersmc.traverse.biome.TraverseBiomes;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.server.BiomeTagProvider;
-import net.minecraft.tag.BiomeTags;
-import net.minecraft.tag.TagKey;
+import net.minecraft.data.DataOutput;
+import net.minecraft.data.server.tag.vanilla.VanillaBiomeTagProvider;
+import net.minecraft.registry.RegistryWrapper.WrapperLookup;
+import net.minecraft.registry.tag.BiomeTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.Nullable;
 
-public class TraverseBiomeTagProvider extends BiomeTagProvider {
-	public TraverseBiomeTagProvider(DataGenerator dataGenerator, ExistingFileHelper helper) {
-		super(dataGenerator, Traverse.MOD_ID, helper);
+import java.util.concurrent.CompletableFuture;
+
+public class TraverseBiomeTagProvider extends VanillaBiomeTagProvider {
+	public TraverseBiomeTagProvider(DataOutput arg, CompletableFuture<WrapperLookup> completableFuture, ExistingFileHelper helper) {
+		super(arg, completableFuture, Traverse.MOD_ID, helper);
 	}
 
 	@Override
-	protected void configure() {
+	protected void configure(WrapperLookup lookup) {
 		/*
 		 * Vanilla biome categories
 		 */
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.ALLOWS_SURFACE_SLIME_SPAWNS.id()))
+		this.getOrCreateTagBuilder(BiomeTags.ALLOWS_SURFACE_SLIME_SPAWNS)
 			.add(TraverseBiomes.LUSH_SWAMP);
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.IS_FOREST.id()))
+		this.getOrCreateTagBuilder(BiomeTags.IS_FOREST)
 			.add(TraverseBiomes.AUTUMNAL_WOODS)
 			.add(TraverseBiomes.CONIFEROUS_FOREST)
 			.add(TraverseBiomes.WOODLANDS);
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.IS_TAIGA.id()))
+		this.getOrCreateTagBuilder(BiomeTags.IS_TAIGA)
 			.add(TraverseBiomes.SNOWY_CONIFEROUS_FOREST);
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.SPAWNS_COLD_VARIANT_FROGS.id()))
+		this.getOrCreateTagBuilder(BiomeTags.SPAWNS_COLD_VARIANT_FROGS)
 			.add(TraverseBiomes.SNOWY_CONIFEROUS_FOREST);
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.SPAWNS_WARM_VARIANT_FROGS.id()))
+		this.getOrCreateTagBuilder(BiomeTags.SPAWNS_WARM_VARIANT_FROGS)
 			.add(TraverseBiomes.DESERT_SHRUBLAND);
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.WATER_ON_MAP_OUTLINES.id()))
+		this.getOrCreateTagBuilder(BiomeTags.WATER_ON_MAP_OUTLINES)
 			.add(TraverseBiomes.LUSH_SWAMP);
 
 
 		/*
 		 * Conventional biome categories
 		 */
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), new Identifier("forge", "is_temperate")))
+		this.getOrCreateTagBuilder(TagKey.of(this.registryRef, new Identifier("forge", "is_temperate")))
 			.add(TraverseBiomes.AUTUMNAL_WOODS)
 			.add(TraverseBiomes.CONIFEROUS_FOREST)
 			.add(TraverseBiomes.FLATLANDS)
 			.add(TraverseBiomes.LUSH_SWAMP)
 			.add(TraverseBiomes.WOODLANDS);
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), Tags.Biomes.IS_SANDY.id()))
+		this.getOrCreateTagBuilder(Tags.Biomes.IS_SANDY)
 			.add(TraverseBiomes.DESERT_SHRUBLAND);
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), Tags.Biomes.IS_PLAINS.id()))
+		this.getOrCreateTagBuilder(Tags.Biomes.IS_PLAINS)
 			.add(TraverseBiomes.FLATLANDS);
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.IS_OVERWORLD.id()))
+		this.getOrCreateTagBuilder(BiomeTags.IS_OVERWORLD)
 			.add(TraverseBiomes.AUTUMNAL_WOODS)
 			.add(TraverseBiomes.CONIFEROUS_FOREST)
 			.add(TraverseBiomes.DESERT_SHRUBLAND)
@@ -68,16 +71,16 @@ public class TraverseBiomeTagProvider extends BiomeTagProvider {
 			.add(TraverseBiomes.SNOWY_CONIFEROUS_FOREST)
 			.add(TraverseBiomes.WOODLANDS);
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), Tags.Biomes.IS_SNOWY.id()))
+		this.getOrCreateTagBuilder(Tags.Biomes.IS_SNOWY)
 			.add(TraverseBiomes.SNOWY_CONIFEROUS_FOREST);
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), Tags.Biomes.IS_SWAMP.id()))
+		this.getOrCreateTagBuilder(Tags.Biomes.IS_SWAMP)
 			.add(TraverseBiomes.LUSH_SWAMP);
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), Tags.Biomes.IS_CONIFEROUS.id()))
+		this.getOrCreateTagBuilder(Tags.Biomes.IS_CONIFEROUS)
 			.add(TraverseBiomes.CONIFEROUS_FOREST);
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), new Identifier("forge", "is_deciduous")))
+		this.getOrCreateTagBuilder(TagKey.of(this.registryRef, new Identifier("forge", "is_deciduous")))
 			.add(TraverseBiomes.AUTUMNAL_WOODS)
 			.add(TraverseBiomes.LUSH_SWAMP)
 			.add(TraverseBiomes.WOODLANDS);
@@ -86,34 +89,34 @@ public class TraverseBiomeTagProvider extends BiomeTagProvider {
 		/*
 		 * Biome structure generation tags
 		 */
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.IGLOO_HAS_STRUCTURE.id()))
+		this.getOrCreateTagBuilder(BiomeTags.IGLOO_HAS_STRUCTURE)
 			.add(TraverseBiomes.SNOWY_CONIFEROUS_FOREST);
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.MINESHAFT_HAS_STRUCTURE.id()))
+		this.getOrCreateTagBuilder(BiomeTags.MINESHAFT_HAS_STRUCTURE)
 			.add(TraverseBiomes.DESERT_SHRUBLAND)
 			.add(TraverseBiomes.FLATLANDS)
 			.add(TraverseBiomes.LUSH_SWAMP);
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.PILLAGER_OUTPOST_HAS_STRUCTURE.id()))
+		this.getOrCreateTagBuilder(BiomeTags.PILLAGER_OUTPOST_HAS_STRUCTURE)
 			.add(TraverseBiomes.CONIFEROUS_FOREST)
 			.add(TraverseBiomes.DESERT_SHRUBLAND)
 			.add(TraverseBiomes.FLATLANDS)
 			.add(TraverseBiomes.SNOWY_CONIFEROUS_FOREST)
 			.add(TraverseBiomes.WOODLANDS);
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.RUINED_PORTAL_DESERT_HAS_STRUCTURE.id()))
+		this.getOrCreateTagBuilder(BiomeTags.RUINED_PORTAL_DESERT_HAS_STRUCTURE)
 			.add(TraverseBiomes.DESERT_SHRUBLAND);
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.RUINED_PORTAL_STANDARD_HAS_STRUCTURE.id()))
+		this.getOrCreateTagBuilder(BiomeTags.RUINED_PORTAL_STANDARD_HAS_STRUCTURE)
 			.add(TraverseBiomes.CONIFEROUS_FOREST)
 			.add(TraverseBiomes.FLATLANDS)
 			.add(TraverseBiomes.SNOWY_CONIFEROUS_FOREST)
 			.add(TraverseBiomes.WOODLANDS);
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.RUINED_PORTAL_SWAMP_HAS_STRUCTURE.id()))
+		this.getOrCreateTagBuilder(BiomeTags.RUINED_PORTAL_SWAMP_HAS_STRUCTURE)
 			.add(TraverseBiomes.LUSH_SWAMP);
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.STRONGHOLD_HAS_STRUCTURE.id()))
+		this.getOrCreateTagBuilder(BiomeTags.STRONGHOLD_HAS_STRUCTURE)
 			.add(TraverseBiomes.AUTUMNAL_WOODS)
 			.add(TraverseBiomes.CONIFEROUS_FOREST)
 			.add(TraverseBiomes.DESERT_SHRUBLAND)
@@ -122,13 +125,13 @@ public class TraverseBiomeTagProvider extends BiomeTagProvider {
 			.add(TraverseBiomes.SNOWY_CONIFEROUS_FOREST)
 			.add(TraverseBiomes.WOODLANDS);
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.SWAMP_HUT_HAS_STRUCTURE.id()))
+		this.getOrCreateTagBuilder(BiomeTags.SWAMP_HUT_HAS_STRUCTURE)
 			.add(TraverseBiomes.LUSH_SWAMP);
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.VILLAGE_DESERT_HAS_STRUCTURE.id()))
+		this.getOrCreateTagBuilder(BiomeTags.VILLAGE_DESERT_HAS_STRUCTURE)
 			.add(TraverseBiomes.DESERT_SHRUBLAND);
 
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.VILLAGE_PLAINS_HAS_STRUCTURE.id()))
+		this.getOrCreateTagBuilder(BiomeTags.VILLAGE_PLAINS_HAS_STRUCTURE)
 			.add(TraverseBiomes.FLATLANDS)
 			.add(TraverseBiomes.WOODLANDS);
 	}

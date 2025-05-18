@@ -5,17 +5,21 @@ import com.terraformersmc.traverse.block.TraverseBlocks;
 import com.terraformersmc.traverse.tag.TraverseBlockTags;
 
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.server.BlockTagProvider;
-import net.minecraft.tag.BlockTags;
+import net.minecraft.data.DataOutput;
+import net.minecraft.registry.RegistryWrapper.WrapperLookup;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-public class TraverseBlockTagProvider extends BlockTagProvider {
-	public TraverseBlockTagProvider(DataGenerator dataGenerator, ExistingFileHelper helper) {
-		super(dataGenerator, Traverse.MOD_ID, helper);
+import java.util.concurrent.CompletableFuture;
+
+public class TraverseBlockTagProvider extends BlockTagsProvider {
+	public TraverseBlockTagProvider(DataOutput dataOutput, CompletableFuture<WrapperLookup> lookup, ExistingFileHelper helper) {
+		super(dataOutput, lookup, Traverse.MOD_ID, helper);
 	}
 
 	@Override
-	protected void configure() {
+	protected void configure(WrapperLookup lookup) {
 		this.getOrCreateTagBuilder(BlockTags.AXE_MINEABLE)
 			.add(TraverseBlocks.FIR_FENCE_GATE);
 

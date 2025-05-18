@@ -4,19 +4,25 @@ import com.terraformersmc.traverse.Traverse;
 import com.terraformersmc.traverse.block.TraverseBlocks;
 import com.terraformersmc.traverse.item.TraverseBoatTypes;
 import com.terraformersmc.traverse.tag.TraverseItemTags;
+import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.server.BlockTagProvider;
-import net.minecraft.data.server.ItemTagProvider;
-import net.minecraft.tag.ItemTags;
+import net.minecraft.data.DataOutput;
+import net.minecraft.data.server.tag.ItemTagProvider;
+import net.minecraft.registry.RegistryWrapper.WrapperLookup;
+import net.minecraft.registry.tag.ItemTags;
+import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.concurrent.CompletableFuture;
 
 public class TraverseItemTagProvider extends ItemTagProvider {
-	public TraverseItemTagProvider(DataGenerator dataGenerator, BlockTagProvider provider, ExistingFileHelper helper) {
-		super(dataGenerator, provider, Traverse.MOD_ID, helper);
+	public TraverseItemTagProvider(DataOutput dataOutput, CompletableFuture<WrapperLookup> completableFuture, CompletableFuture<TagLookup<Block>> completableFuture2, @Nullable ExistingFileHelper existingFileHelper) {
+		super(dataOutput, completableFuture, completableFuture2, Traverse.MOD_ID, existingFileHelper);
 	}
 
 	@Override
-	protected void configure() {
+	protected void configure(WrapperLookup lookup) {
 		this.getOrCreateTagBuilder(ItemTags.BOATS)
 			.add(TraverseBoatTypes.fir.getItem());
 
