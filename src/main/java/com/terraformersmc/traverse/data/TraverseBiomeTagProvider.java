@@ -26,113 +26,113 @@ public class TraverseBiomeTagProvider extends VanillaBiomeTagProvider {
 		 * Vanilla biome categories
 		 */
 		this.getOrCreateTagBuilder(BiomeTags.ALLOWS_SURFACE_SLIME_SPAWNS)
-			.add(TraverseBiomes.LUSH_SWAMP);
+			.addOptional(TraverseBiomes.LUSH_SWAMP.getValue());
 
 		this.getOrCreateTagBuilder(BiomeTags.IS_FOREST)
-			.add(TraverseBiomes.AUTUMNAL_WOODS)
-			.add(TraverseBiomes.CONIFEROUS_FOREST)
-			.add(TraverseBiomes.WOODLANDS);
+			.addOptional(TraverseBiomes.AUTUMNAL_WOODS.getValue())
+			.addOptional(TraverseBiomes.CONIFEROUS_FOREST.getValue())
+			.addOptional(TraverseBiomes.WOODLANDS.getValue());
 
 		this.getOrCreateTagBuilder(BiomeTags.IS_TAIGA)
-			.add(TraverseBiomes.SNOWY_CONIFEROUS_FOREST);
+			.addOptional(TraverseBiomes.SNOWY_CONIFEROUS_FOREST.getValue());
 
 		this.getOrCreateTagBuilder(BiomeTags.SPAWNS_COLD_VARIANT_FROGS)
-			.add(TraverseBiomes.SNOWY_CONIFEROUS_FOREST);
+			.addOptional(TraverseBiomes.SNOWY_CONIFEROUS_FOREST.getValue());
 
 		this.getOrCreateTagBuilder(BiomeTags.SPAWNS_WARM_VARIANT_FROGS)
-			.add(TraverseBiomes.DESERT_SHRUBLAND);
+			.addOptional(TraverseBiomes.DESERT_SHRUBLAND.getValue());
 
 		this.getOrCreateTagBuilder(BiomeTags.WATER_ON_MAP_OUTLINES)
-			.add(TraverseBiomes.LUSH_SWAMP);
+			.addOptional(TraverseBiomes.LUSH_SWAMP.getValue());
 
 
 		/*
 		 * Conventional biome categories
 		 */
 		this.getOrCreateTagBuilder(TagKey.of(this.registryRef, new Identifier("forge", "is_temperate")))
-			.add(TraverseBiomes.AUTUMNAL_WOODS)
-			.add(TraverseBiomes.CONIFEROUS_FOREST)
-			.add(TraverseBiomes.FLATLANDS)
-			.add(TraverseBiomes.LUSH_SWAMP)
-			.add(TraverseBiomes.WOODLANDS);
+			.addOptional(TraverseBiomes.AUTUMNAL_WOODS.getValue())
+			.addOptional(TraverseBiomes.CONIFEROUS_FOREST.getValue())
+			.addOptional(TraverseBiomes.FLATLANDS.getValue())
+			.addOptional(TraverseBiomes.LUSH_SWAMP.getValue())
+			.addOptional(TraverseBiomes.WOODLANDS.getValue());
 
 		this.getOrCreateTagBuilder(Tags.Biomes.IS_SANDY)
-			.add(TraverseBiomes.DESERT_SHRUBLAND);
+			.addOptional(TraverseBiomes.DESERT_SHRUBLAND.getValue());
 
 		this.getOrCreateTagBuilder(Tags.Biomes.IS_PLAINS)
-			.add(TraverseBiomes.FLATLANDS);
+			.addOptional(TraverseBiomes.FLATLANDS.getValue());
 
 		this.getOrCreateTagBuilder(BiomeTags.IS_OVERWORLD)
-			.add(TraverseBiomes.AUTUMNAL_WOODS)
-			.add(TraverseBiomes.CONIFEROUS_FOREST)
-			.add(TraverseBiomes.DESERT_SHRUBLAND)
-			.add(TraverseBiomes.FLATLANDS)
-			.add(TraverseBiomes.LUSH_SWAMP)
-			.add(TraverseBiomes.SNOWY_CONIFEROUS_FOREST)
-			.add(TraverseBiomes.WOODLANDS);
+			.addOptional(TraverseBiomes.AUTUMNAL_WOODS.getValue())
+			.addOptional(TraverseBiomes.CONIFEROUS_FOREST.getValue())
+			.addOptional(TraverseBiomes.DESERT_SHRUBLAND.getValue())
+			.addOptional(TraverseBiomes.FLATLANDS.getValue())
+			.addOptional(TraverseBiomes.LUSH_SWAMP.getValue())
+			.addOptional(TraverseBiomes.SNOWY_CONIFEROUS_FOREST.getValue())
+			.addOptional(TraverseBiomes.WOODLANDS.getValue());
 
 		this.getOrCreateTagBuilder(Tags.Biomes.IS_SNOWY)
-			.add(TraverseBiomes.SNOWY_CONIFEROUS_FOREST);
+			.addOptional(TraverseBiomes.SNOWY_CONIFEROUS_FOREST.getValue());
 
 		this.getOrCreateTagBuilder(Tags.Biomes.IS_SWAMP)
-			.add(TraverseBiomes.LUSH_SWAMP);
+			.addOptional(TraverseBiomes.LUSH_SWAMP.getValue());
 
 		this.getOrCreateTagBuilder(Tags.Biomes.IS_CONIFEROUS)
-			.add(TraverseBiomes.CONIFEROUS_FOREST);
+			.addOptional(TraverseBiomes.CONIFEROUS_FOREST.getValue());
 
 		this.getOrCreateTagBuilder(TagKey.of(this.registryRef, new Identifier("forge", "is_deciduous")))
-			.add(TraverseBiomes.AUTUMNAL_WOODS)
-			.add(TraverseBiomes.LUSH_SWAMP)
-			.add(TraverseBiomes.WOODLANDS);
+			.addOptional(TraverseBiomes.AUTUMNAL_WOODS.getValue())
+			.addOptional(TraverseBiomes.LUSH_SWAMP.getValue())
+			.addOptional(TraverseBiomes.WOODLANDS.getValue());
 
 
 		/*
 		 * Biome structure generation tags
 		 */
 		this.getOrCreateTagBuilder(BiomeTags.IGLOO_HAS_STRUCTURE)
-			.add(TraverseBiomes.SNOWY_CONIFEROUS_FOREST);
+			.addOptional(TraverseBiomes.SNOWY_CONIFEROUS_FOREST.getValue());
 
 		this.getOrCreateTagBuilder(BiomeTags.MINESHAFT_HAS_STRUCTURE)
-			.add(TraverseBiomes.DESERT_SHRUBLAND)
-			.add(TraverseBiomes.FLATLANDS)
-			.add(TraverseBiomes.LUSH_SWAMP);
+			.addOptional(TraverseBiomes.DESERT_SHRUBLAND.getValue())
+			.addOptional(TraverseBiomes.FLATLANDS.getValue())
+			.addOptional(TraverseBiomes.LUSH_SWAMP.getValue());
 
 		this.getOrCreateTagBuilder(BiomeTags.PILLAGER_OUTPOST_HAS_STRUCTURE)
-			.add(TraverseBiomes.CONIFEROUS_FOREST)
-			.add(TraverseBiomes.DESERT_SHRUBLAND)
-			.add(TraverseBiomes.FLATLANDS)
-			.add(TraverseBiomes.SNOWY_CONIFEROUS_FOREST)
-			.add(TraverseBiomes.WOODLANDS);
+			.addOptional(TraverseBiomes.CONIFEROUS_FOREST.getValue())
+			.addOptional(TraverseBiomes.DESERT_SHRUBLAND.getValue())
+			.addOptional(TraverseBiomes.FLATLANDS.getValue())
+			.addOptional(TraverseBiomes.SNOWY_CONIFEROUS_FOREST.getValue())
+			.addOptional(TraverseBiomes.WOODLANDS.getValue());
 
 		this.getOrCreateTagBuilder(BiomeTags.RUINED_PORTAL_DESERT_HAS_STRUCTURE)
-			.add(TraverseBiomes.DESERT_SHRUBLAND);
+			.addOptional(TraverseBiomes.DESERT_SHRUBLAND.getValue());
 
 		this.getOrCreateTagBuilder(BiomeTags.RUINED_PORTAL_STANDARD_HAS_STRUCTURE)
-			.add(TraverseBiomes.CONIFEROUS_FOREST)
-			.add(TraverseBiomes.FLATLANDS)
-			.add(TraverseBiomes.SNOWY_CONIFEROUS_FOREST)
-			.add(TraverseBiomes.WOODLANDS);
+			.addOptional(TraverseBiomes.CONIFEROUS_FOREST.getValue())
+			.addOptional(TraverseBiomes.FLATLANDS.getValue())
+			.addOptional(TraverseBiomes.SNOWY_CONIFEROUS_FOREST.getValue())
+			.addOptional(TraverseBiomes.WOODLANDS.getValue());
 
 		this.getOrCreateTagBuilder(BiomeTags.RUINED_PORTAL_SWAMP_HAS_STRUCTURE)
-			.add(TraverseBiomes.LUSH_SWAMP);
+			.addOptional(TraverseBiomes.LUSH_SWAMP.getValue());
 
 		this.getOrCreateTagBuilder(BiomeTags.STRONGHOLD_HAS_STRUCTURE)
-			.add(TraverseBiomes.AUTUMNAL_WOODS)
-			.add(TraverseBiomes.CONIFEROUS_FOREST)
-			.add(TraverseBiomes.DESERT_SHRUBLAND)
-			.add(TraverseBiomes.FLATLANDS)
-			.add(TraverseBiomes.LUSH_SWAMP)
-			.add(TraverseBiomes.SNOWY_CONIFEROUS_FOREST)
-			.add(TraverseBiomes.WOODLANDS);
+			.addOptional(TraverseBiomes.AUTUMNAL_WOODS.getValue())
+			.addOptional(TraverseBiomes.CONIFEROUS_FOREST.getValue())
+			.addOptional(TraverseBiomes.DESERT_SHRUBLAND.getValue())
+			.addOptional(TraverseBiomes.FLATLANDS.getValue())
+			.addOptional(TraverseBiomes.LUSH_SWAMP.getValue())
+			.addOptional(TraverseBiomes.SNOWY_CONIFEROUS_FOREST.getValue())
+			.addOptional(TraverseBiomes.WOODLANDS.getValue());
 
 		this.getOrCreateTagBuilder(BiomeTags.SWAMP_HUT_HAS_STRUCTURE)
-			.add(TraverseBiomes.LUSH_SWAMP);
+			.addOptional(TraverseBiomes.LUSH_SWAMP.getValue());
 
 		this.getOrCreateTagBuilder(BiomeTags.VILLAGE_DESERT_HAS_STRUCTURE)
-			.add(TraverseBiomes.DESERT_SHRUBLAND);
+			.addOptional(TraverseBiomes.DESERT_SHRUBLAND.getValue());
 
 		this.getOrCreateTagBuilder(BiomeTags.VILLAGE_PLAINS_HAS_STRUCTURE)
-			.add(TraverseBiomes.FLATLANDS)
-			.add(TraverseBiomes.WOODLANDS);
+			.addOptional(TraverseBiomes.FLATLANDS.getValue())
+			.addOptional(TraverseBiomes.WOODLANDS.getValue());
 	}
 }

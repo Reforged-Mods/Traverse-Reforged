@@ -4,6 +4,7 @@ import com.terraformersmc.terraform.utils.TerraformRecipeProvider;
 import com.terraformersmc.traverse.Traverse;
 import com.terraformersmc.traverse.block.TraverseBlocks;
 import com.terraformersmc.traverse.item.TraverseBoatTypes;
+import com.terraformersmc.traverse.item.TraverseItems;
 import com.terraformersmc.traverse.tag.TraverseItemTags;
 import net.minecraft.advancement.criterion.InventoryChangedCriterion;
 import net.minecraft.block.Blocks;
@@ -43,13 +44,13 @@ public class TraverseRecipeProvider extends TerraformRecipeProvider {
 			.criterion("has_planks", InventoryChangedCriterion.Conditions.items(TraverseBlocks.FIR_PLANKS))
 			.offerTo(exporter);
 
-		offerHangingSignRecipe(exporter, TraverseBlocks.FIR_HANGING_SIGN, TraverseBlocks.STRIPPED_FIR_LOG);
+		offerHangingSignRecipe(exporter, TraverseItems.FIR_HANGING_SIGN, TraverseBlocks.STRIPPED_FIR_LOG);
 
 		offerPlanksRecipe(exporter, TraverseBlocks.FIR_PLANKS, TraverseItemTags.FIR_LOGS, 4);
 
 		offerPressurePlateRecipe(exporter, TraverseBlocks.FIR_PRESSURE_PLATE, TraverseBlocks.FIR_PLANKS);
 
-		createSignRecipe(TraverseBlocks.FIR_SIGN, Ingredient.ofItems(TraverseBlocks.FIR_PLANKS))
+		createSignRecipe(TraverseItems.FIR_SIGN, Ingredient.ofItems(TraverseBlocks.FIR_PLANKS))
 			.criterion("has_planks", InventoryChangedCriterion.Conditions.items(TraverseBlocks.FIR_PLANKS))
 			.offerTo(exporter);
 
