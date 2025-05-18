@@ -26,10 +26,10 @@ public class TraverseItemTagProvider extends ItemTagProvider {
 	@Override
 	protected void configure(WrapperLookup lookup) {
 		this.getOrCreateTagBuilder(ItemTags.BOATS)
-			.add(TraverseBoatTypes.fir.getItem());
+			.add(TraverseBoatTypes.FIR_BOAT);
 
 		this.getOrCreateTagBuilder(ItemTags.CHEST_BOATS)
-			.add(TraverseBoatTypes.fir.getChestItem());
+			.add(TraverseBoatTypes.FIR_CHEST_BOAT);
 
 		copy(BlockTags.LEAVES, ItemTags.LEAVES);
 

@@ -26,8 +26,8 @@ public class TraverseRecipeProvider extends TerraformRecipeProvider {
 
 	@Override
 	protected void generate(Consumer<RecipeJsonProvider> exporter) {
-		offerBoatRecipe(exporter, TraverseBoatTypes.fir.getItem(), TraverseBlocks.FIR_PLANKS);
-		ShapelessRecipeJsonBuilder.create(RecipeCategory.TRANSPORTATION, TraverseBoatTypes.fir.getChestItem()).input(Blocks.CHEST).input(TraverseBoatTypes.fir.getItem()).group("chest_boat").criterion("has_boat", conditionsFromTag(ItemTags.BOATS)).offerTo(exporter);
+		offerBoatRecipe(exporter, TraverseBoatTypes.FIR_BOAT, TraverseBlocks.FIR_PLANKS);
+		ShapelessRecipeJsonBuilder.create(RecipeCategory.TRANSPORTATION, TraverseBoatTypes.FIR_CHEST_BOAT).input(Blocks.CHEST).input(TraverseBoatTypes.FIR_BOAT).group("chest_boat").criterion("has_boat", conditionsFromTag(ItemTags.BOATS)).offerTo(exporter);
 
 		offerSingleOutputShapelessRecipe(exporter, TraverseBlocks.FIR_BUTTON, TraverseBlocks.FIR_PLANKS, "wooden_button");
 
